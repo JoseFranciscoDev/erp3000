@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de cliente</title>
+</head>
+
+<body>
+    <a href="../">Voltar</a>
+    <form>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" required>
+        <br>
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+<script type="module">
+    const form = document.getElementsByTagName('form')[0]
+    const nomeInput = document.getElementById('nome')
+    const emailInput = document.getElementById('email')
+    const cidadeInput = document.getElementById('cidade')
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault()
+        const nome = nomeInput.value
+        const email = emailInput.value
+        const cidade = cidadeInput.value
+        const response = await window.versions.salvarCliente({ nome, email, cidade })
+        console.log(response)
+    })
+</script>
+
+</html>

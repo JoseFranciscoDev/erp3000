@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de pedido</title>
+</head>
+
+<body>
+    <a href="../">Voltar</a>
+    <form>
+        <label for="id_cliente">ID do Cliente:</label>
+        <input type="number" id="id_cliente" name="id_cliente" required>
+        <br>
+        <label for="id_produto">ID do Produto:</label>
+        <input type="number" id="id_produto" name="id_produto" required>
+        <br>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" required>
+        <br>
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" required>
+        <br>
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+<script type="module">
+    const form = document.getElementsByTagName('form')[0]
+    const idClienteInput = document.getElementById('id_cliente')
+    const idProdutoInput = document.getElementById('id_produto')
+    const quantidadeInput = document.getElementById('quantidade')
+    const emailInput = document.getElementById('email')
+    const cidadeInput = document.getElementById('cidade')
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault()
+        const idCliente = idClienteInput.value
+        const idProduto = idProdutoInput.value
+        const quantidade = quantidadeInput.value
+        const email = emailInput.value
+        const cidade = cidadeInput.value
+        const response = await window.versions.salvarPedido({ idCliente, idProduto, quantidade, email, cidade })
+        console.log(response)
+    })
+</script>
+
+</html>
