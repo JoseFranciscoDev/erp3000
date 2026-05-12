@@ -8,6 +8,7 @@ O **ERP 3000** é uma aplicação desktop desenvolvida com **Electron**, focada 
 * **Node.js**: Backend e gerenciamento de processos.
 * **MySQL**: Banco de dados relacional.
 * **JavaScript (ESM)**: Módulos modernos para o processo principal.
+* **HTML/CSS**:Estruturação do Frontend e estilização. 
 
 ---
 
