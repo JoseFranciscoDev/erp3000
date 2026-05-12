@@ -56,7 +56,6 @@ CREATE TABLE itens_pedido (
     id_pedido INT NOT NULL,
     id_produto INT NOT NULL,
     quantidade INT NOT NULL,
-    preco_unitario DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id) ON DELETE CASCADE,
     FOREIGN KEY (id_produto) REFERENCES produtos(id)
 );
@@ -68,7 +67,7 @@ Siga os comandos abaixo no seu terminal:
 Clone o repositório:
 
 Bash
-git clone [https://github.com/seu-usuario/erp3000.git](https://github.com/seu-usuario/erp3000.git)
+git clone https://github.com/JoseFranciscoDev/erp3000.git
 cd erp3000
 Instale as dependências:
 
