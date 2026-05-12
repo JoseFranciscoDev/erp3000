@@ -16,7 +16,7 @@ O **ERP 3000** é uma aplicação desktop desenvolvida com **Electron**, focada 
 Antes de rodar a aplicação, você precisará de:
 * [Node.js](https://nodejs.org/) (v18+)
 * [MySQL Server](https://dev.mysql.com/) ativo.
-* Gerenciador de pacotes `npm`.
+* Gerenciador de pacotes como o npm.
 
 ---
 
@@ -59,6 +59,7 @@ CREATE TABLE itens_pedido (
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id) ON DELETE CASCADE,
     FOREIGN KEY (id_produto) REFERENCES produtos(id)
 );
+```
 Nota: Lembre-se de atualizar as credenciais de acesso (host, user, password) no seu arquivo db.js.
 
 🚀 Como Rodar o Projeto
@@ -67,16 +68,22 @@ Siga os comandos abaixo no seu terminal:
 Clone o repositório:
 
 Bash
+```
 git clone https://github.com/JoseFranciscoDev/erp3000.git
+```
 cd erp3000
 Instale as dependências:
 
 Bash
+```
 npm install
+```
 Inicie a aplicação:
 
 Bash
+```
 npm start
+```
 📂 Estrutura de Arquivos
 main.js: Coração da aplicação, gerencia janelas e eventos do sistema.
 
