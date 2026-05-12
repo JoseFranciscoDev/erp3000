@@ -1,32 +1,37 @@
-Aqui está um modelo de README.md profissional e direto ao ponto, ideal para o seu repositório no GitHub. Ele cobre desde os pré-requisitos até a configuração do banco de dados, que é a parte mais sensível do seu projeto.
+Com certeza! O GitHub interpreta o formato Markdown, então aqui está o conteúdo do seu README.md pronto para copiar e colar, com toda a formatação de títulos (#), blocos de código e negritos correta.
 
-ERP 3000 - Sistema de Gestão 🚀
-O ERP 3000 é uma aplicação desktop desenvolvida com Electron, focada no gerenciamento de clientes, produtos e pedidos. O projeto utiliza Node.js no processo principal e MySQL para persistência de dados, implementando transações robustas para garantir a integridade dos pedidos.
+Passo 1: Crie o arquivo
+Crie um arquivo chamado README.md na raiz do seu projeto e cole o conteúdo abaixo:
 
-🛠️ Tecnologias Utilizadas
-Electron: Framework para criação de apps desktop.
+Markdown
+# ERP 3000 - Sistema de Gestão Desktop 🚀
 
-Node.js: Ambiente de execução backend.
+O **ERP 3000** é uma aplicação desktop desenvolvida com **Electron**, focada no gerenciamento de clientes, produtos e pedidos. Este projeto foi construído para demonstrar a integração entre processos do Electron, comunicação IPC segura e persistência em banco de dados relacional com transações.
 
-MySQL: Banco de dados relacional.
+## 🛠️ Tecnologias Utilizadas
 
-JavaScript (ESM): Padrão moderno de módulos.
+* **Electron**: Framework para interface desktop.
+* **Node.js**: Backend e gerenciamento de processos.
+* **MySQL**: Banco de dados relacional.
+* **JavaScript (ESM)**: Módulos modernos para o processo principal.
 
-📋 Pré-requisitos
-Antes de começar, você precisará ter instalado em sua máquina:
+---
 
-Node.js (Versão 18 ou superior recomendada)
+## 📋 Pré-requisitos
 
-MySQL Server
+Antes de rodar a aplicação, você precisará de:
+* [Node.js](https://nodejs.org/) (v18+)
+* [MySQL Server](https://dev.mysql.com/) ativo.
+* Gerenciador de pacotes `npm`.
 
-Gerenciador de pacotes (npm ou yarn)
+---
 
-🏗️ Configuração do Banco de Dados
-Abra o seu terminal MySQL ou um cliente como MySQL Workbench.
+## 🏗️ Configuração do Banco de Dados
 
-Execute o script SQL abaixo para criar a estrutura necessária:
+1. Acesse seu terminal MySQL ou Workbench.
+2. Crie o banco de dados e as tabelas executando o script abaixo:
 
-SQL
+```sql
 CREATE DATABASE erp3000;
 USE erp3000;
 
@@ -61,13 +66,15 @@ CREATE TABLE itens_pedido (
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id) ON DELETE CASCADE,
     FOREIGN KEY (id_produto) REFERENCES produtos(id)
 );
-Atenção: Certifique-se de configurar suas credenciais (usuário e senha) no arquivo db.js antes de rodar a aplicação.
+Nota: Lembre-se de atualizar as credenciais de acesso (host, user, password) no seu arquivo db.js.
 
 🚀 Como Rodar o Projeto
+Siga os comandos abaixo no seu terminal:
+
 Clone o repositório:
 
 Bash
-git clone https://github.com/seu-usuario/erp3000.git
+git clone [https://github.com/seu-usuario/erp3000.git](https://github.com/seu-usuario/erp3000.git)
 cd erp3000
 Instale as dependências:
 
@@ -77,24 +84,20 @@ Inicie a aplicação:
 
 Bash
 npm start
-📁 Estrutura do Projeto
-main.js: Processo principal (gerenciamento de janelas e IPC).
+📂 Estrutura de Arquivos
+main.js: Coração da aplicação, gerencia janelas e eventos do sistema.
 
-preload.js: Ponte de segurança entre o sistema e o frontend.
+preload.js: Ponte de segurança (Context Bridge) entre o Node.js e o navegador.
 
-renderer.js: Lógica da interface do usuário.
+db.js: Camada de persistência com funções assíncronas e transações SQL.
 
-db.js: Conexão e consultas ao banco de dados MySQL.
+renderer.js: Lógica de interface e manipulação do DOM.
 
-index.html: Interface principal do sistema.
+index.html: Dashboard principal.
 
-📝 Funcionalidades Implementadas
-[x] Cadastro de Clientes.
+🧠 Conceitos Aplicados
+IPC (Inter-Process Communication): Uso de ipcMain.handle e ipcRenderer.invoke para comunicação assíncrona bidirecional.
 
-[x] Cadastro de Produtos.
+Transações SQL: Implementação de beginTransaction, commit e rollback para garantir que um pedido só seja salvo se todos os seus itens forem registrados corretamente.
 
-[x] Cadastro de Pedidos com Múltiplos Itens.
-
-[x] Uso de Transações SQL (Commit/Rollback) para segurança dos dados.
-
-[x] Comunicação assíncrona via ipcMain e ipcRenderer.
+Segurança: Uso de contextBridge para evitar exposição direta de APIs do Node.js no frontend.
