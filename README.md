@@ -1,9 +1,3 @@
-Com certeza! O GitHub interpreta o formato Markdown, então aqui está o conteúdo do seu README.md pronto para copiar e colar, com toda a formatação de títulos (#), blocos de código e negritos correta.
-
-Passo 1: Crie o arquivo
-Crie um arquivo chamado README.md na raiz do seu projeto e cole o conteúdo abaixo:
-
-Markdown
 # ERP 3000 - Sistema de Gestão Desktop 🚀
 
 O **ERP 3000** é uma aplicação desktop desenvolvida com **Electron**, focada no gerenciamento de clientes, produtos e pedidos. Este projeto foi construído para demonstrar a integração entre processos do Electron, comunicação IPC segura e persistência em banco de dados relacional com transações.
