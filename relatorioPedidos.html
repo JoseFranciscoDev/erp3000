@@ -1,32 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro de cliente</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
     <button onclick="window.versions.irParaHome()">Voltar</button>
-    <ul>
-
-    </ul>
-</body>
-<script type="module">
-    const ul = document.getElementsByTagName('ul')[0]
-    const pedidos = await window.versions.obterPedidos()
-    console.log(pedidos)
-    pedidos.forEach(pedido => {
-        const item = document.createElement('li')
-        item.innerHTML += `
+    <ul></ul>
+  </body>
+  <script type="module">
+    const ul = document.getElementsByTagName("ul")[0];
+    const pedidos = await window.versions.obterPedidos();
+    pedidos.forEach((pedido) => {
+      const item = document.createElement("li");
+      item.innerHTML += `
         Pedido ID: ${pedido.id},
         Cliente: ${pedido.nome_cliente},
-        Status: ${pedido.status}`
-        ul.appendChild(item)
-    })
-    console.log(pedidos)
-</script>
-
+        Status: ${pedido.status}`;
+      ul.appendChild(item);
+    });
+  </script>
 </html>

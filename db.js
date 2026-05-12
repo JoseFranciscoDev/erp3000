@@ -53,6 +53,7 @@ export const salvarPedido = async (dadosPedido) => {
             const estoqueDisponivel = estoqueResult[0].estoque;
 
             if (item.quantidade >= estoqueDisponivel) {
+                novaConexao.query('ROLLBACK')
                 throw new Error(`Produto ${item.idProduto} tem estoque insuficiente! Disponível: ${estoqueDisponivel}`);
             }
             await novaConexao.execute(sqlItem, [
