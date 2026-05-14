@@ -19,7 +19,9 @@ const createWindow = () => {
     win.loadFile('index.html')
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+    await db.criarTabelas();
+
     ipcMain.handle('ping', () => {
         return 'pong'
     })

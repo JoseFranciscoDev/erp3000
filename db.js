@@ -40,7 +40,7 @@ export const salvarPedido = async (dadosPedido) => {
 
     try {
         await novaConexao.query('START TRANSACTION');
-        const sqlEsoque = 'SELECT estoque FROM produtos WHERE id = ?';
+        const sqlEstoque = 'SELECT estoque FROM produtos WHERE id = ?';
         const sqlPedido = 'INSERT INTO pedidos (id_cliente, status, data_pedido) VALUES (?, ? , ?)';
         const [resultPedido] = await novaConexao.execute(sqlPedido, [dadosPedido.idCliente, 'entregue', data]);
 
@@ -49,8 +49,9 @@ export const salvarPedido = async (dadosPedido) => {
         const sqlItem = 'INSERT INTO itens_pedido (id_pedido, id_produto, quantidade) VALUES (?, ?, ?)';
 
         for (const item of dadosPedido.itens) {
-            const [estoqueResult] = await novaConexao.execute(sqlEsoque, [item.idProduto]);
+            const [estoqueResult] = await novaConexao.execute(sqlEstoque, [item.idProduto]);
             const estoqueDisponivel = estoqueResult[0].estoque;
+            console.log(estoqueResult)
 
             if (item.quantidade >= estoqueDisponivel) {
                 novaConexao.query('ROLLBACK')
@@ -88,3 +89,52 @@ export const salvarProduto = async (produto) => {
         await novaConexao.end()
     }
 }
+
+export const criarTabelas = async () => {
+    const novaConexao = await mysql.createConnection(dbConfig);
+    try {
+        await novaConexao.query(`
+            CREATE TABLE IF NOT EXISTS clientes (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                nome VARCHAR(100) NOT NULL,
+                email VARCHAR(100) UNIQUE NOT NULL,
+                cidade VARCHAR(50),
+                data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
+        await novaConexao.query(`
+            CREATE TABLE IF NOT EXISTS produtos (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                nome VARCHAR(100) NOT NULL,
+                preco DECIMAL(10, 2) NOT NULL,
+                estoque INT NOT NULL DEFAULT 0
+            )
+        `);
+
+        await novaConexao.query(`
+            CREATE TABLE IF NOT EXISTS pedidos (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                id_cliente INT,
+                data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (id_cliente) REFERENCES clientes(id)
+            )
+        `);
+
+        await novaConexao.query(`
+            CREATE TABLE IF NOT EXISTS itens_pedido (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                id_pedido INT NOT NULL,
+                id_produto INT NOT NULL,
+                quantidade INT NOT NULL,
+                FOREIGN KEY (id_pedido) REFERENCES pedidos(id) ON DELETE CASCADE,
+                FOREIGN KEY (id_produto) REFERENCES produtos(id)
+            )
+        `);
+        console.log("Tabelas verificadas/criadas com sucesso!");
+    } catch (error) {
+        console.error("Erro ao criar tabelas:", error);
+    } finally {
+        await novaConexao.end();
+    }
+};
